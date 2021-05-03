@@ -134,6 +134,23 @@ STRING_LITERAL:
         '"' STRING_CHAR* '"'
     );
 
+// Characters
+
+fragment CHAR_ENCODING:
+    'u' | 'U' | 'L';
+
+fragment CHAR_CONTENT:
+    (
+        '\\' ('\r\n' | '\n') // Continuation line
+        | '\\x' HEXADECIMAL_DIGIT
+        | '\\' ['!?abfnrtv\\] // Character escape sequences (\r \a)
+        | '\\' OCTAL_DIGIT
+        | ~[\n\r\\]
+    );
+
+CHAR_LITERAL:
+    CHAR_ENCODING?  '\'' CHAR_CONTENT '\'' ;
+
 // Numbers
 
 fragment SIGN:

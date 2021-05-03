@@ -18,26 +18,16 @@
  */
 package org.netbeans.modules.cnd.nextapt.antlr4;
 
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Paths;
 
 /**
  *
+ * @author antonio
  */
-public class Main {
+public class APTCharTest extends APTLexerAbstractTest {
 
-    public static void main(String[] args) throws Exception {
-        List<APTLexerAbstractTest> tests = Arrays.asList(
-                // new APTLexerStringTest(),
-                // new APTIncludeTest(),
-                // new APTDefineTest()
-                new APTCharTest()
-        );
-
-        for (APTLexerAbstractTest test : tests) {
-            test.test();
-        }
-            
+    public APTCharTest() throws Exception {
+        super(Paths.get("tests", "c", "char.c"));
     }
 
 }

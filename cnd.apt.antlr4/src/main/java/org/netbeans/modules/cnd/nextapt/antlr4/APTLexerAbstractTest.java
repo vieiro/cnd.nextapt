@@ -23,15 +23,22 @@ import java.io.FileReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.file.Path;
+import java.util.BitSet;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.atn.ATNConfigSet;
+import org.antlr.v4.runtime.dfa.DFA;
 import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,7 +46,7 @@ import org.w3c.dom.Element;
 /**
  * Performs a test of APTLexer
  */
-public abstract class APTLexerAbstractTest {
+public abstract class APTLexerAbstractTest implements ANTLRErrorListener {
 
     protected final Path inputFilePath;
     protected final Document document;
@@ -71,6 +78,7 @@ public abstract class APTLexerAbstractTest {
     public final void test() throws Exception {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath.toFile()))) {
             APTLexer lexer = new APTLexer(CharStreams.fromReader(reader));
+            lexer.addErrorListener(this);
             doTest(lexer);
         }
         Transformer tf = TransformerFactory.newInstance().newTransformer();
@@ -93,6 +101,31 @@ public abstract class APTLexerAbstractTest {
             previousLexerMode = lexer.getModeNames()[lexer._mode];
         } while(true);
         System.out.println("Done.");
+    }
+
+    @Override
+    public void syntaxError(Recognizer<?, ?> rcgnzr, Object o, int i, int i1, String string, RecognitionException re) {
+        System.err.format("Syntax error on file: %s: %s string=%s%n",
+                inputFilePath.toString(),
+                re.getMessage(),
+                string
+                );
+        throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reportAmbiguity(Parser parser, DFA dfa, int i, int i1, boolean bln, BitSet bitset, ATNConfigSet atncs) {
+        throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reportAttemptingFullContext(Parser parser, DFA dfa, int i, int i1, BitSet bitset, ATNConfigSet atncs) {
+        throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reportContextSensitivity(Parser parser, DFA dfa, int i, int i1, int i2, ATNConfigSet atncs) {
+        throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
