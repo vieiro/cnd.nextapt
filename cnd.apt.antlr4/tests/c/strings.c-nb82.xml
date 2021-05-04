@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tokens>
+<token col="1" line="1" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="2" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="4" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="5" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="6" mode="DEFAULT_MODE" name="COMMENT" offset="0" previousMode="DEFAULT_MODE" type="495"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="12" line="9" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="14" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING1]]></token>
+<token col="22" line="9" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="24" line="9" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA["This is a simple string"]]></token>
+<token col="49" line="9" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="12" line="10" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="14" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING1]]></token>
+<token col="22" line="10" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="24" line="10" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA[u"This is a simple string"]]></token>
+<token col="50" line="10" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="11" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="11" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="12" line="11" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="14" line="11" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING1]]></token>
+<token col="22" line="11" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="24" line="11" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA[u8"This is a simple string"]]></token>
+<token col="51" line="11" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="12" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="12" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="12" line="12" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="14" line="12" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING1]]></token>
+<token col="22" line="12" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="24" line="12" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA[L"This is a simple string"]]></token>
+<token col="50" line="12" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="13" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="13" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[NSString]]></token>
+<token col="16" line="13" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="18" line="13" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING1]]></token>
+<token col="26" line="13" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="28" line="13" mode="DEFAULT_MODE" name="AT" offset="0" previousMode="DEFAULT_MODE" type="53"><![CDATA[@]]></token>
+<token col="29" line="13" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA["This is a simple string"]]></token>
+<token col="54" line="13" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="7" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="12" line="15" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="14" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[STRING_CONTINUATED]]></token>
+<token col="33" line="15" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="35" line="15" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA["This is a simple\
+    string\
+    with continuations"]]></token>
+<token col="24" line="17" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+</tokens>

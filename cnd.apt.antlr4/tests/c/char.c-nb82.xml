@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tokens>
+<token col="1" line="1" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="2" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="5" mode="DEFAULT_MODE" name="INCLUDE" offset="0" previousMode="DEFAULT_MODE" type="95"><![CDATA[#include ]]></token>
+<token col="10" line="5" mode="DEFAULT_MODE" name="SYS_INCLUDE_STRING" offset="0" previousMode="DEFAULT_MODE" type="94"><![CDATA[<stdio.h>]]></token>
+<token col="19" line="5" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[int]]></token>
+<token col="5" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[main]]></token>
+<token col="9" line="7" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="10" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[int]]></token>
+<token col="14" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[argc]]></token>
+<token col="18" line="7" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="20" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="26" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="31" line="7" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="33" line="7" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[argv]]></token>
+<token col="37" line="7" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="1" line="8" mode="DEFAULT_MODE" name="LCURLY" offset="0" previousMode="DEFAULT_MODE" type="16"><![CDATA[{]]></token>
+<token col="5" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="11" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="16" line="9" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[constants]]></token>
+<token col="26" line="9" mode="DEFAULT_MODE" name="LSQUARE" offset="0" previousMode="DEFAULT_MODE" type="14"><![CDATA[[]]></token>
+<token col="27" line="9" mode="DEFAULT_MODE" name="RSQUARE" offset="0" previousMode="DEFAULT_MODE" type="15"><![CDATA[]]]></token>
+<token col="29" line="9" mode="DEFAULT_MODE" name="ASSIGNEQUAL" offset="0" previousMode="DEFAULT_MODE" type="6"><![CDATA[=]]></token>
+<token col="31" line="9" mode="DEFAULT_MODE" name="LCURLY" offset="0" previousMode="DEFAULT_MODE" type="16"><![CDATA[{]]></token>
+<token col="9" line="10" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA[u'ñ']]></token>
+<token col="13" line="10" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="11" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA[L'ñ']]></token>
+<token col="13" line="11" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="12" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA[U'ñ']]></token>
+<token col="13" line="12" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="13" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\a']]></token>
+<token col="13" line="13" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="14" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\n']]></token>
+<token col="13" line="14" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="15" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\t']]></token>
+<token col="13" line="15" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="16" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\r']]></token>
+<token col="13" line="16" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="17" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\f']]></token>
+<token col="13" line="17" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="18" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['\
+']]></token>
+<token col="2" line="19" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="20" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['#']]></token>
+<token col="12" line="20" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="21" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['a']]></token>
+<token col="12" line="21" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="9" line="22" mode="DEFAULT_MODE" name="CHAR_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="78"><![CDATA['"']]></token>
+<token col="5" line="23" mode="DEFAULT_MODE" name="RCURLY" offset="0" previousMode="DEFAULT_MODE" type="17"><![CDATA[}]]></token>
+<token col="6" line="23" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="5" line="24" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[return]]></token>
+<token col="12" line="24" mode="DEFAULT_MODE" name="OCTALINT" offset="0" previousMode="DEFAULT_MODE" type="66"><![CDATA[0]]></token>
+<token col="13" line="24" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="25" mode="DEFAULT_MODE" name="RCURLY" offset="0" previousMode="DEFAULT_MODE" type="17"><![CDATA[}]]></token>
+</tokens>

@@ -16,18 +16,35 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.netbeans.modules.cnd.nextapt.antlr4;
+package org.netbeans.modules.cnd.apt;
 
-import java.nio.file.Paths;
+import java.io.File;
 
 /**
+ * Sports the old org.netbeans.modules.cnd.antlr.Tool compiler to generate a
+ * lexer, and then runs the lexer.
  *
  * @author antonio
  */
-public class APTCharTest extends APTLexerAbstractTest {
+public class Main {
 
-    public APTCharTest() throws Exception {
-        super(Paths.get("tests", "c", "char.c"));
+    public static void main(String[] args) throws Exception {
+
+        if (args.length == 0) {
+            System.err.println("Usage: java org.netbeans.modules.cnd.apt.Main file.[ch] ...\n");
+            System.exit(1);
+        }
+
+        for (String arg : args) {
+            File file = new File(arg);
+            if (! file.exists()) {
+                System.err.format("ERROR: File %s does not exist.%n", file.getAbsolutePath());
+            } else {
+                APTLexerNoSyntaxErrorTest test = new APTLexerNoSyntaxErrorTest(file.toPath(), true);
+                test.test();
+            }
+        }
+
     }
 
 }

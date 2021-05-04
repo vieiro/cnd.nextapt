@@ -16,19 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.netbeans.modules.cnd.nextapt.antlr4;
-
-import java.nio.file.Paths;
+package org.netbeans.api.annotations.common;
 
 /**
  *
  * @author antonio
  */
-public class APTLexerStringTest extends APTLexerAbstractTest {
-
-    public APTLexerStringTest() throws Exception {
-        super(Paths.get("tests", "c", "strings.c"));
-    }
-
-   
+public @interface SuppressWarnings {
+   public String value() default "Dummy"; 
 }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tokens>
+<token col="1" line="1" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="2" mode="DEFAULT_MODE" name="CPP_COMMENT" offset="0" previousMode="DEFAULT_MODE" type="496"><![CDATA[<comment text skipped>]]></token>
+<token col="1" line="3" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="3" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[PI]]></token>
+<token col="12" line="3" mode="DEFAULT_MODE" name="FLOATONE" offset="0" previousMode="DEFAULT_MODE" type="63"><![CDATA[3.1416]]></token>
+<token col="18" line="3" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="4" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="4" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[PI2]]></token>
+<token col="13" line="4" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[PI]]></token>
+<token col="5" line="5" mode="DEFAULT_MODE" name="PLUS" offset="0" previousMode="DEFAULT_MODE" type="26"><![CDATA[+]]></token>
+<token col="7" line="5" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[1]]></token>
+<token col="9" line="5" mode="DEFAULT_MODE" name="MINUS" offset="0" previousMode="DEFAULT_MODE" type="29"><![CDATA[-]]></token>
+<token col="11" line="5" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[1]]></token>
+<token col="12" line="5" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="6" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="6" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[_LINUX_DEFINED]]></token>
+<token col="23" line="6" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="8" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="8" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[SUM]]></token>
+<token col="12" line="8" mode="DEFAULT_MODE" name="FUN_LIKE_MACRO_LPAREN" offset="0" previousMode="DEFAULT_MODE" type="59"><![CDATA[(]]></token>
+<token col="13" line="8" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[N]]></token>
+<token col="14" line="8" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="16" line="8" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="17" line="8" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[N]]></token>
+<token col="18" line="8" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="19" line="8" mode="DEFAULT_MODE" name="PLUS" offset="0" previousMode="DEFAULT_MODE" type="26"><![CDATA[+]]></token>
+<token col="20" line="8" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[1]]></token>
+<token col="21" line="8" mode="DEFAULT_MODE" name="PLUS" offset="0" previousMode="DEFAULT_MODE" type="26"><![CDATA[+]]></token>
+<token col="22" line="8" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[2]]></token>
+<token col="23" line="8" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="10" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[MUL]]></token>
+<token col="13" line="10" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="14" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[A]]></token>
+<token col="15" line="10" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="17" line="10" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[B]]></token>
+<token col="18" line="10" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="9" line="11" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="10" line="11" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[N]]></token>
+<token col="11" line="11" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="12" line="11" mode="DEFAULT_MODE" name="PLUS" offset="0" previousMode="DEFAULT_MODE" type="26"><![CDATA[+]]></token>
+<token col="13" line="11" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[1]]></token>
+<token col="14" line="11" mode="DEFAULT_MODE" name="PLUS" offset="0" previousMode="DEFAULT_MODE" type="26"><![CDATA[+]]></token>
+<token col="15" line="11" mode="DEFAULT_MODE" name="DECIMALINT" offset="0" previousMode="DEFAULT_MODE" type="67"><![CDATA[2]]></token>
+<token col="16" line="11" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="13" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="13" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[ZERO]]></token>
+<token col="14" line="13" mode="DEFAULT_MODE" name="OCTALINT" offset="0" previousMode="DEFAULT_MODE" type="66"><![CDATA[0]]></token>
+<token col="15" line="13" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="15" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[eprintf]]></token>
+<token col="16" line="15" mode="DEFAULT_MODE" name="FUN_LIKE_MACRO_LPAREN" offset="0" previousMode="DEFAULT_MODE" type="59"><![CDATA[(]]></token>
+<token col="17" line="15" mode="DEFAULT_MODE" name="ELLIPSIS" offset="0" previousMode="DEFAULT_MODE" type="4"><![CDATA[...]]></token>
+<token col="20" line="15" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="22" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[fprintf]]></token>
+<token col="30" line="15" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="31" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[stderr]]></token>
+<token col="37" line="15" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="39" line="15" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[__VA_ARGS__]]></token>
+<token col="50" line="15" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="51" line="15" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="17" mode="DEFAULT_MODE" name="DEFINE" offset="0" previousMode="DEFAULT_MODE" type="97"><![CDATA[#define ]]></token>
+<token col="9" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[log]]></token>
+<token col="12" line="17" mode="DEFAULT_MODE" name="FUN_LIKE_MACRO_LPAREN" offset="0" previousMode="DEFAULT_MODE" type="59"><![CDATA[(]]></token>
+<token col="13" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[fmt]]></token>
+<token col="16" line="17" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="18" line="17" mode="DEFAULT_MODE" name="ELLIPSIS" offset="0" previousMode="DEFAULT_MODE" type="4"><![CDATA[...]]></token>
+<token col="21" line="17" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="23" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[fprintf]]></token>
+<token col="31" line="17" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="32" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[stderr]]></token>
+<token col="38" line="17" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="40" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[fmt]]></token>
+<token col="43" line="17" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="45" line="17" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[__VA_ARGS__]]></token>
+<token col="56" line="17" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="57" line="17" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="19" mode="DEFAULT_MODE" name="INCLUDE" offset="0" previousMode="DEFAULT_MODE" type="95"><![CDATA[#include ]]></token>
+<token col="10" line="19" mode="DEFAULT_MODE" name="SYS_INCLUDE_STRING" offset="0" previousMode="DEFAULT_MODE" type="94"><![CDATA[<stdio.h>]]></token>
+<token col="19" line="19" mode="DEFAULT_MODE" name="END_PREPROC_DIRECTIVE" offset="0" previousMode="DEFAULT_MODE" type="61"/>
+<token col="1" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[int]]></token>
+<token col="5" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[main]]></token>
+<token col="9" line="21" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="10" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[int]]></token>
+<token col="14" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[argc]]></token>
+<token col="18" line="21" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="20" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[const]]></token>
+<token col="26" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[char]]></token>
+<token col="31" line="21" mode="DEFAULT_MODE" name="STAR" offset="0" previousMode="DEFAULT_MODE" type="32"><![CDATA[*]]></token>
+<token col="33" line="21" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[argv]]></token>
+<token col="37" line="21" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="1" line="22" mode="DEFAULT_MODE" name="LCURLY" offset="0" previousMode="DEFAULT_MODE" type="16"><![CDATA[{]]></token>
+<token col="5" line="23" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[printf]]></token>
+<token col="11" line="23" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="12" line="23" mode="DEFAULT_MODE" name="STRING_LITERAL" offset="0" previousMode="DEFAULT_MODE" type="79"><![CDATA["PI2 is %d\n"]]></token>
+<token col="25" line="23" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="27" line="23" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[PI2]]></token>
+<token col="30" line="23" mode="DEFAULT_MODE" name="COMMA" offset="0" previousMode="DEFAULT_MODE" type="8"><![CDATA[,]]></token>
+<token col="32" line="23" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[SUM]]></token>
+<token col="35" line="23" mode="DEFAULT_MODE" name="LPAREN" offset="0" previousMode="DEFAULT_MODE" type="12"><![CDATA[(]]></token>
+<token col="36" line="23" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[PI2]]></token>
+<token col="39" line="23" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="40" line="23" mode="DEFAULT_MODE" name="RPAREN" offset="0" previousMode="DEFAULT_MODE" type="13"><![CDATA[)]]></token>
+<token col="41" line="23" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="5" line="24" mode="DEFAULT_MODE" name="ID" offset="0" previousMode="DEFAULT_MODE" type="91"><![CDATA[return]]></token>
+<token col="12" line="24" mode="DEFAULT_MODE" name="OCTALINT" offset="0" previousMode="DEFAULT_MODE" type="66"><![CDATA[0]]></token>
+<token col="13" line="24" mode="DEFAULT_MODE" name="SEMICOLON" offset="0" previousMode="DEFAULT_MODE" type="10"><![CDATA[;]]></token>
+<token col="1" line="25" mode="DEFAULT_MODE" name="RCURLY" offset="0" previousMode="DEFAULT_MODE" type="17"><![CDATA[}]]></token>
+</tokens>
