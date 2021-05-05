@@ -339,7 +339,7 @@ PREPROC_CONTINUATION:
 PREPROC_SUBMODE_END:
     {isPreprocExpressionSubmode}?
     ('\n' | '\r\n')
-    { leavePreprocExpressionSubmode(); }
+    { setText(""); leavePreprocExpressionSubmode(); }
     ;
 
 EOL:
@@ -368,7 +368,7 @@ INCLUDE_SYSTEM:
 mode READ_DEFINE_MODE;
 
 DEFINE_IDENTIFIER:
-    [a-zA-Z_] [a-zA-Z0-9_]* [ \t]*
+    [a-zA-Z_] [a-zA-Z0-9_]* 
     {
         if (_input.LA(1) == '(') {
             mode(READ_MACRO_ARGS_MODE);
@@ -396,11 +396,16 @@ mode READ_MACRO_ARGS_MODE;
 fragment ARGUMENT_IDENTIFIER:
     [ \t]* [a-zA-Z_] [a-zA-Z0-9_]* [ \t]*;
 
+fragment ARGUMENT_ELLIPSIS:
+    '...';
+
 DEFINE_MACRO_ARGS:
     [ \t]*
     '('
-        ARGUMENT_IDENTIFIER
-        ( ',' ARGUMENT_IDENTIFIER )*
+        (
+            ARGUMENT_ELLIPSIS
+            | ARGUMENT_IDENTIFIER? ( ',' ARGUMENT_IDENTIFIER )* ( ',' ARGUMENT_ELLIPSIS)?
+        )
     ')'
     { enterPreprocExpressionSubmode(); }
     ;

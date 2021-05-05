@@ -62,7 +62,7 @@ public class Main implements ANTLRErrorListener{
     }
 
     private static void dumpToken(APTLexer lexer, String previousLexerMode, Token token) {
-        String tokenText = token.getText().replaceAll("\n","\\n").replaceAll("\r", "\\r");
+        String tokenText = token.getText().replaceAll("(\r\n|\n)", "|");
         String currentLexerMode = lexer.getModeNames()[lexer._mode];
         String tokenName = lexer.VOCABULARY.getSymbolicName(token.getType());
         System.out.format("%4d:%4d:%-20s->%-20s:%-20s:%s%n",

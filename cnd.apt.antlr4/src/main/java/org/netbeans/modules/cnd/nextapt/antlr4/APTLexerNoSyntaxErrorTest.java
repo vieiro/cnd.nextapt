@@ -19,9 +19,15 @@
 package org.netbeans.modules.cnd.nextapt.antlr4;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.BitSet;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,18 +52,20 @@ import org.w3c.dom.Element;
 /**
  * Performs a test of APTLexer
  */
-public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
+public class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
 
     protected final Path inputFilePath;
     protected final Document document;
     protected final Element tokensElement;
+    protected final boolean generateXML;
 
-    protected APTLexerNoSyntaxErrorTest(Path inputFilePath) throws Exception {
+    protected APTLexerNoSyntaxErrorTest(Path inputFilePath, boolean generateXML) throws Exception {
         this.inputFilePath = inputFilePath;
+        this.generateXML = generateXML;
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setValidating(false);
         f.setNamespaceAware(false);
-        document= f.newDocumentBuilder().newDocument();
+        document = f.newDocumentBuilder().newDocument();
         tokensElement = document.createElement("tokens");
         document.appendChild(tokensElement);
     }
@@ -76,18 +84,28 @@ public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
     }
 
     public final void test() throws Exception {
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath.toFile()))) {
-            APTLexer lexer = new APTLexer(CharStreams.fromReader(reader));
-            lexer.addErrorListener(this);
-            doTest(lexer);
+        File inputFile = inputFilePath.toFile();
+        System.out.format("--%s--%n", inputFile.getAbsolutePath());
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+            test(reader);
         }
-        Transformer tf = TransformerFactory.newInstance().newTransformer();
-        tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        tf.setOutputProperty(OutputKeys.INDENT, "yes");
-        Writer out = new StringWriter();
-        tf.transform(new DOMSource(document), new StreamResult(out));
-        System.out.format("--%s--%n", getClass().getName());
-        System.out.println(out.toString());
+        if (generateXML) {
+            Transformer tf = TransformerFactory.newInstance().newTransformer();
+            tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            tf.setOutputProperty(OutputKeys.INDENT, "yes");
+            Writer out = new StringWriter();
+            tf.transform(new DOMSource(document), new StreamResult(out));
+            File outputXML = new File(inputFile.getParentFile(), inputFile.getName() + "-generated.xml");
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputXML), StandardCharsets.UTF_8))) {
+                writer.write(out.toString());
+            }
+        }
+    }
+
+    public final void test(Reader reader) throws Exception {
+        APTLexer lexer = new APTLexer(CharStreams.fromReader(reader));
+        lexer.addErrorListener(this);
+        doTest(lexer);
     }
 
     private void doTest(APTLexer lexer) throws Exception {
@@ -99,7 +117,7 @@ public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
             }
             addToken(lexer, previousLexerMode, token);
             previousLexerMode = lexer.getModeNames()[lexer._mode];
-        } while(true);
+        } while (true);
         System.out.println("Done.");
     }
 
@@ -109,7 +127,7 @@ public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
                 inputFilePath.toString(),
                 re.getMessage(),
                 string
-                );
+        );
         throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -127,5 +145,5 @@ public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
     public void reportContextSensitivity(Parser parser, DFA dfa, int i, int i1, int i2, ATNConfigSet atncs) {
         throw new IllegalStateException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
