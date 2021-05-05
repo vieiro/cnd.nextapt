@@ -8,6 +8,15 @@
 #define MUL (A, B) \
         (N)+1+2
 
+#define A 3
+
+#if A \
+    == 3
+// A is 3
+#else
+// A is not 3
+#endif
+
 #include <stdio.h>
 
 int main(int argc, const char * argv) 

@@ -66,6 +66,24 @@ options {
         FORTRAN
     };
     private LanguageMode languageMode = LanguageMode.C_CPP;
+
+    /*
+     * A flag that indicates that we're reading a preprocessor expression in DEFAULT_MODE.
+     * This means that:
+     * - A '\' followed that \n or \r\n must be ignored.
+     * - A \n or a \r\n must emit PREPROC_SUBMODE_END token.
+     */
+    protected boolean isPreprocExpressionSubmode = false;
+
+    protected void enterPreprocExpressionSubmode() {
+        isPreprocExpressionSubmode = true;
+        mode(DEFAULT_MODE);
+    }
+
+    protected void leavePreprocExpressionSubmode() {
+        isPreprocExpressionSubmode = false;
+        mode(DEFAULT_MODE);
+    }
 }
 
 // ----------------------------------------------------------------------
@@ -153,64 +171,82 @@ CHAR_LITERAL:
 
 // Numbers
 
-fragment SIGN:
-    [+-];
-
 fragment DECIMAL:
     [0-9] [0-9]*;
 
+ULONG:
+    DECIMAL ('ull' | 'uLL' | 'Ull' | 'ULL' | 'llu' | 'LLu' | 'LLU')?;
+
 LONG:
-    SIGN? DECIMAL 'lL';
+    DECIMAL ('ul' | 'uL' | 'Ul' | 'UL' | 'lu' | 'lU' | 'Lu' | 'LU')?;
 
 INTEGER:
-    SIGN? DECIMAL;
+    DECIMAL;
 
 HEXADECIMAL:
-    SIGN? '0' [xX] [0-9a-fA-F]+;
+    '0' [xX] [0-9a-fA-F]+;
+
+fragment SIGN:
+    [+-];
 
 REAL:
-    DECIMAL '.' ([eE] SIGN? DECIMAL)?;
+    DECIMAL '.' DECIMAL? ([eE] SIGN? DECIMAL)?;
 
 // #include "... and %:+ include "...
-INCLUDE_LOCAL:
+INCLUDE:
     ('#' | '%:'+)
     [ \t]*
     'include'
     [ \t]*
-    '"' -> mode(READ_INCLUDE_LOCAL_FILENAME);
-
-// #include "... and %:+ include "...
-INCLUDE_SYSTEM:
-    ('#' | '%:'+)
-    [ \t]*
-    'include'
-    [ \t]*
-    '<' -> mode(READ_INCLUDE_SYSTEM_FILENAME);
+    -> mode(READ_INCLUDE_MODE);
 
 // #define "... and %:+ include "...
 DEFINE:
     ('#' | '%:'+)
     [ \t]*
     'define'
-    [ \t]* -> mode(READ_DEFINE_NAME_MACRO_MODE);
+    [ \t]* -> mode(READ_DEFINE_MODE);
 
 IFDEF:
     ('#' | '%:'+)
     [ \t]*
     'ifdef'
-    [ \t]* -> mode(READ_DEFINE_NAME_REF_MODE);
+    [ \t]* -> mode(READ_DEFINE_REF_MODE);
+
+IFNDEF:
+    ('#' | '%:'+)
+    [ \t]*
+    'ifndef'
+    [ \t]* -> mode(READ_DEFINE_REF_MODE);
+
+PRAGMA:
+    ('#' | '%:'+)
+    [ \t]*
+    'pragma'
+    { enterPreprocExpressionSubmode(); }
+    ;
 
 UNDEF:
     ('#' | '%:'+)
     [ \t]*
     'undef'
-    [ \t]* -> mode(READ_DEFINE_NAME_REF_MODE);
+    [ \t]* -> mode(READ_DEFINE_REF_MODE);
 
 IF:
     ('#' | '%:'+)
     [ \t]*
     'if'
-    [ \t]* -> mode(PREPROC_EXPRESSION_MODE);
+    [ \t]*
+    { enterPreprocExpressionSubmode(); }
+    ;
+
+ELIF:
+    ('#' | '%:'+)
+    [ \t]*
+    'if'
+    [ \t]*
+    { enterPreprocExpressionSubmode(); }
+    ;
 
 ELSE:
     ('#' | '%:'+)
@@ -238,6 +274,8 @@ DIGRAPH_RCURLY          : '%>'  -> type(RCURLY);
 DIGRAPH_HASH            : '%:'+ -> type(HASH);
 
 // Operators and punctuation
+ELLIPSIS                : '...';
+DOT                     : '.';
 COMMA                   : ',';
 QUESTIONMARK            : '?';
 SEMICOLON               : ';';
@@ -292,89 +330,77 @@ IDENTIFIER:
     [a-zA-Z_] [a-zA-Z0-9_]*;
 
 SPACES:
-    [ \t\r\n]+ -> skip;
+    [ \t\f]+ -> skip;
+
+PREPROC_CONTINUATION:
+    {isPreprocExpressionSubmode}?
+    ('\\\n' | '\\\r\n') -> skip;
+
+PREPROC_SUBMODE_END:
+    {isPreprocExpressionSubmode}?
+    ('\n' | '\r\n')
+    { leavePreprocExpressionSubmode(); }
+    ;
+
+EOL:
+    {!isPreprocExpressionSubmode}?
+    [\r\n]+ -> skip;
 
 // ----------------------------------------------------------------------
-// READ_INCLUDE_LOCAL_FILENAME
+// READ_INCLUDE_MODE
 // We enter this mode after '#include "'
 // (or equivalent)
 // ----------------------------------------------------------------------
 
-mode READ_INCLUDE_LOCAL_FILENAME;
+mode READ_INCLUDE_MODE;
 
-INCLUDE_LOCAL_FILENAME:
-    ~[\r\n]+ '"' -> mode(DEFAULT_MODE);
+INCLUDE_LOCAL:
+    '"' ~[\r\n]+ '"' -> mode(DEFAULT_MODE);
 
-// ----------------------------------------------------------------------
-// READ_INCLUDE_SYSTEM_FILENAME
-// We enter this mode after '#include <'
-// (or equivalent)
-// ----------------------------------------------------------------------
-
-mode READ_INCLUDE_SYSTEM_FILENAME;
-
-INCLUDE_SYSTEM_FILENAME:
-    ~[\r\n]+ '>' -> mode(DEFAULT_MODE);
+INCLUDE_SYSTEM:
+    '<' ~[\r\n]+ '>' -> mode(DEFAULT_MODE);
 
 // ----------------------------------------------------------------------
-// READ_DEFINE_NAME_MACRO_MODE
+// READ_DEFINE_MODE
 // We enter this mode after '#define '
 // (or equivalent)
 // ----------------------------------------------------------------------
-mode READ_DEFINE_NAME_MACRO_MODE;
+mode READ_DEFINE_MODE;
 
 DEFINE_IDENTIFIER:
-    [a-zA-Z_] [a-zA-Z0-9_]* [ \t]* -> mode(READ_MACRO_ARGS_OR_EXPRESSION_MODE);
+    [a-zA-Z_] [a-zA-Z0-9_]* [ \t]*
+    {
+        if (_input.LA(1) == '(') {
+            mode(READ_MACRO_ARGS_MODE);
+        } else {
+            enterPreprocExpressionSubmode();
+        }
+    };
 
 // ----------------------------------------------------------------------
-// READ_DEFINE_NAME_REF_MODE
+// READ_DEFINE_REF_MODE
 // We enter this mode after '#define '
 // (or equivalent)
 // ----------------------------------------------------------------------
-mode READ_DEFINE_NAME_REF_MODE;
+mode READ_DEFINE_REF_MODE;
 
 DEFINE_NAME_REF:
-    [a-zA-Z_] [a-zA-Z0-9_]* [ \t]* -> mode(READ_MACRO_ARGS_OR_EXPRESSION_MODE);
+    [a-zA-Z_] [a-zA-Z0-9_]* -> mode(DEFAULT_MODE);
 
 // ----------------------------------------------------------------------
-// READ_MACRO_ARGS_OR_EXPRESSION_MODE
+// READ_MACRO_ARGS_MODE
 // We enter this mode after '#define XXXX'
 // ----------------------------------------------------------------------
-mode READ_MACRO_ARGS_OR_EXPRESSION_MODE;
+mode READ_MACRO_ARGS_MODE;
 
 fragment ARGUMENT_IDENTIFIER:
     [ \t]* [a-zA-Z_] [a-zA-Z0-9_]* [ \t]*;
 
-DEFINE_MACRO_ARGUMENTS:
+DEFINE_MACRO_ARGS:
     [ \t]*
     '('
         ARGUMENT_IDENTIFIER
         ( ',' ARGUMENT_IDENTIFIER )*
-    ')' -> mode(PREPROC_EXPRESSION_MODE);
-
-DEFINE_ID:
-    [ \t\r\n] -> mode(DEFAULT_MODE);
-
-DEFINE_EXPRESSION:
-    [ \t]*
-    ~'('
-    (
-        '\\\n'
-        | '\\\r\n'
-        | ~[\r\n]
-    )+ -> mode(DEFAULT_MODE);
-
-// ----------------------------------------------------------------------
-// PREPROC_EXPRESSION_MODE
-// We enter this mode to read a preprocessor expression.
-// This can be a constant or an expression or something.
-// ----------------------------------------------------------------------
-mode PREPROC_EXPRESSION_MODE;
-
-DEFINE_VALUE:
-    (
-        '\\\n'
-        | '\\\r\n'
-        | ~[\r\n]
-    )+ -> mode(DEFAULT_MODE);
-
+    ')'
+    { enterPreprocExpressionSubmode(); }
+    ;

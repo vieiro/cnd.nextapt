@@ -46,13 +46,13 @@ import org.w3c.dom.Element;
 /**
  * Performs a test of APTLexer
  */
-public abstract class APTLexerAbstractTest implements ANTLRErrorListener {
+public abstract class APTLexerNoSyntaxErrorTest implements ANTLRErrorListener {
 
     protected final Path inputFilePath;
     protected final Document document;
     protected final Element tokensElement;
 
-    protected APTLexerAbstractTest(Path inputFilePath) throws Exception {
+    protected APTLexerNoSyntaxErrorTest(Path inputFilePath) throws Exception {
         this.inputFilePath = inputFilePath;
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         f.setValidating(false);

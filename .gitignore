@@ -11,3 +11,4 @@ buildNumber.properties
 *.swp
 *.swo
 
+/cnd.apt.antlr4/nbproject/
