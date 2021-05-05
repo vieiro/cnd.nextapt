@@ -64,6 +64,7 @@ public class Main implements ANTLRErrorListener{
         double bytes = 0;
         long start = System.currentTimeMillis();
         if (fileOrDirectory.isFile()) {
+            nfiles++;
             bytes += fileOrDirectory.length();
             lexFile(fileOrDirectory);
         } else {
