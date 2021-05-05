@@ -200,6 +200,14 @@ INCLUDE:
     [ \t]*
     -> mode(READ_INCLUDE_MODE);
 
+// #include_next "... and %:+ include_next "...
+INCLUDE_NEXT:
+    ('#' | '%:'+)
+    [ \t]*
+    'include_next'
+    [ \t]*
+    -> mode(READ_INCLUDE_MODE);
+
 // #define "... and %:+ include "...
 DEFINE:
     ('#' | '%:'+)
@@ -243,7 +251,7 @@ IF:
 ELIF:
     ('#' | '%:'+)
     [ \t]*
-    'if'
+    'elif'
     [ \t]*
     { enterPreprocExpressionSubmode(); }
     ;
@@ -661,7 +669,7 @@ LITERAL_while:
 // https://docs.microsoft.com/en-us/cpp/c-language/c-identifiers?view=msvc-160
 
 IDENTIFIER:
-    [a-zA-Z_] [a-zA-Z0-9_]*;
+    [a-zA-Z_$] [a-zA-Z0-9_$]*;
 
 SPACES:
     [ \t\f]+ -> skip;
@@ -702,7 +710,7 @@ INCLUDE_SYSTEM:
 mode READ_DEFINE_MODE;
 
 DEFINE_IDENTIFIER:
-    [a-zA-Z_] [a-zA-Z0-9_]* 
+    [a-zA-Z_$] [a-zA-Z0-9_$]*
     {
         if (_input.LA(1) == '(') {
             mode(READ_MACRO_ARGS_MODE);
@@ -719,7 +727,7 @@ DEFINE_IDENTIFIER:
 mode READ_DEFINE_REF_MODE;
 
 DEFINE_NAME_REF:
-    [a-zA-Z_] [a-zA-Z0-9_]* -> mode(DEFAULT_MODE);
+    [a-zA-Z_$] [a-zA-Z0-9_$]* -> mode(DEFAULT_MODE);
 
 // ----------------------------------------------------------------------
 // READ_MACRO_ARGS_MODE
@@ -727,19 +735,23 @@ DEFINE_NAME_REF:
 // ----------------------------------------------------------------------
 mode READ_MACRO_ARGS_MODE;
 
-fragment ARGUMENT_IDENTIFIER:
-    [ \t]* [a-zA-Z_] [a-zA-Z0-9_]* [ \t]*;
 
-fragment ARGUMENT_ELLIPSIS:
-    [ \t]* '...' [ \t]*;
+MACRO_WHITESPACE:
+    [ \t] -> skip;
 
-DEFINE_MACRO_ARGS:
-    [ \t]*
-    '('
-        (
-            ARGUMENT_ELLIPSIS
-            | ARGUMENT_IDENTIFIER? ( ',' ARGUMENT_IDENTIFIER )* ( ',' ARGUMENT_ELLIPSIS)?
-        )
+MACRO_SEPARATOR:
+    ',' -> skip;
+
+MACRO_CONTINUATION:
+    ('\\\n' | '\\\r\n') -> skip;
+
+MACRO_ARGS_START: '(';
+
+MACRO_ARGS_END:
     ')'
     { enterPreprocExpressionSubmode(); }
     ;
+ARGUMENT_ELLIPSIS:
+    '...';
+ARGUMENT_IDENTIFIER:
+    [a-zA-Z_$] [a-zA-Z0-9_$]*;

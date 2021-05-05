@@ -18,6 +18,8 @@
  */
 package org.netbeans.modules.cnd.nextapt.antlr4;
 
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.BitSet;
@@ -37,26 +39,77 @@ import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
 public class Main implements ANTLRErrorListener{
 
     public static void main(String[] args) throws Exception {
-        InputStream input = System.in;
-        if (args.length == 1) {
-            input = new FileInputStream(args[0]);
-        } else {
-            System.err.format("Usage: java %s [input-file]%n", Main.class.getName());
-            System.exit(1);
+        switch(args.length) {
+            case 0:
+                lexInputStream(System.in);
+                break;
+            case 1:
+                lexFileOrDirectory(new File(args[0]));
+                break;
+            default:
+                System.err.format("Usage: java %s [input-file]%n", Main.class.getName());
+                System.err.format("   Lexes stdin if no file is specified.%n");
+                System.err.format("   Lexes a file or directory (*.h/*.c) otherwise.%n");
+                System.err.format("Use -Dlexer.print=false to disable dumping to stdout.%n");
+                System.exit(1);
         }
+    }
+
+    private static void lexFileOrDirectory(File fileOrDirectory) throws Exception {
+        if (! fileOrDirectory.exists()) {
+            System.err.format("File %s does not exist.%n", fileOrDirectory.getAbsolutePath());
+            System.exit(2);
+        }
+        int nfiles = 0;
+        double bytes = 0;
+        long start = System.currentTimeMillis();
+        if (fileOrDirectory.isFile()) {
+            bytes += fileOrDirectory.length();
+            lexFile(fileOrDirectory);
+        } else {
+            for (File file : fileOrDirectory.listFiles()) {
+                String name = file.getName().toLowerCase();
+                if (name.endsWith(".h") || name.endsWith(".c")) {
+                    lexFile(file);
+                    nfiles++;
+                    bytes += file.length();
+                }
+            }
+        }
+        double seconds = (System.currentTimeMillis() - start) / 1000.0;
+        double filesPerSecond = nfiles / seconds;
+        double megaBytesPerSecond = bytes / 1024 / seconds;
+        System.err.format("Processed %d files in %5.2g seconds (%5.2g files/second %5.2g Mb/second).%n", 
+                nfiles, seconds, filesPerSecond, megaBytesPerSecond);
+    }
+
+    private static void lexFile(File file) throws Exception {
+        System.err.format("-- %s --%n", file.getAbsolutePath());
+        try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(file), 32*1024)) {
+            lexInputStream(input);
+        }
+    }
+
+    private static void lexInputStream(InputStream input) throws Exception {
         Main main = new Main();
         main.dumpTokens(input);
     }
 
     public void dumpTokens(InputStream input) throws Exception {
+        String print = System.getProperty("lexer.print");
+        boolean dump = (print != null && print.toLowerCase().equals("false"))? false : true;
         APTLexer lexer = new APTLexer(CharStreams.fromStream(input));
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(this);
         String previousLexerMode = lexer.getModeNames()[lexer._mode];
         do {
             Token token = lexer.nextToken();
             if (token.getType() == Token.EOF) {
                 break;
             }
-            dumpToken(lexer, previousLexerMode, token);
+            if (dump) {
+                dumpToken(lexer, previousLexerMode, token);
+            }
             previousLexerMode = lexer.getModeNames()[lexer._mode];
         } while(true);
     }
@@ -82,7 +135,7 @@ public class Main implements ANTLRErrorListener{
                 column,
                 message
                 );
-        System.exit(2);
+        System.exit(3);
     }
 
     @Override
