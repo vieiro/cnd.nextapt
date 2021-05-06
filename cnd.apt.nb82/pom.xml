@@ -59,7 +59,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>org.netbeans.modules.cnd.apt.Main</mainClass>
+                                    <mainClass>org.netbeans.modules.cnd.apt.Performance</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

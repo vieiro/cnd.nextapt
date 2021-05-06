@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:3.0.0:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
+                <exec.args>-XX:+UseLinuxPosixThreadCPUClocks -agentpath:/home/antonio/SOFTWARE/NB12.3/profiler/lib/deployed/jdk16/linux-amd64/libprofilerinterface.so=/home/antonio/SOFTWARE/NB12.3/profiler/lib,5140 -Dlexer.print=false -classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -24,7 +24,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:3.0.0:exec</goal>
             </goals>
             <properties>
-                <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
+                <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} -XX:+UseLinuxPosixThreadCPUClocks -agentpath:/home/antonio/SOFTWARE/NB12.3/profiler/lib/deployed/jdk16/linux-amd64/libprofilerinterface.so=/home/antonio/SOFTWARE/NB12.3/profiler/lib,5140 -Dlexer.print=false -classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -39,7 +39,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:3.0.0:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
+                <exec.args>-XX:+UseLinuxPosixThreadCPUClocks -agentpath:/home/antonio/SOFTWARE/NB12.3/profiler/lib/deployed/jdk16/linux-amd64/libprofilerinterface.so=/home/antonio/SOFTWARE/NB12.3/profiler/lib,5140 -Dlexer.print=false -classpath %classpath org.netbeans.modules.cnd.nextapt.antlr4.Main /usr/include</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
