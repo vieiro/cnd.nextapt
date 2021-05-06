@@ -16,23 +16,42 @@ mvn clean install
 
 == Run NB8.2 Lexer
 
-To run the NB8.2 lexer and generate an XML file with the tokens (that will be placed near the input file).
+To run the NB8.2 lexer, run the following command:
 
 [source, bash]
 ----
-java -jar cnd.apt.nb82/target/cnd.apt.nb82-1.0-SNAPSHOT-jar-with-dependencies.jar input.[ch]
+$ cd cnd.apt.nb82
+$ java -Dlexer.print=false -jar target/cnd.apt.nb82-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/include/
+----
+
+This will read all `*.h/*.c` files in /usr/include and will report some performance information, like so:
+
+[source, bash]
+----
+Processed 200 files in  0,76 seconds (2,6e+02 files/second 4,2e+03 Mb/second).
 ----
 
 == Run the Antlr4 lexer
 
-To run the Antlr4 powered lexer, issue the following command:
+To run the Antlr4 powered lexer, run the following command:
 
 [source, bash]
 ----
-cnd.apt.antlr4/target/cnd.apt.antlr4-1.0-SNAPSHOT-jar-with-dependencies.jar input.[ch]
+$ cd cnd.apt.antlr4
+$ java -Dlexer.print=false -jar target/cnd.apt.antlr4-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/include/
 ----
 
-This will print out the lexer tokens on stdout.
+This will read all `*.h/*.c` files in /usr/include and will report some performance information, like so:
+
+[source, bash]
+----
+Processed 200 files in  0,50 seconds (4,0e+02 files/second 6,4e+03 Mb/second).
+----
+
+WARNING: If the lexer fails please report the error in the NetBeans @dev mailing list.
+
+If you want to see the lexer modes and tokens then remove the `-Dlexer.print=false` in the command line.
+
 
 == License
 

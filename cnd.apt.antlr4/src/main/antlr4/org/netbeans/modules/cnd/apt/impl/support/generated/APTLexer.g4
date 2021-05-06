@@ -36,6 +36,7 @@ options {
 }
 
 tokens {
+PREPROC_SUBMODE_END,
 LITERAL_alignas, LITERAL__Alignas, LITERAL___alignof,
 LITERAL___alignof__, LITERAL_alignof, LITERAL__Alignof,
 LITERAL___asm, LITERAL___asm__, LITERAL__asm, LITERAL_asm,
@@ -396,18 +397,19 @@ SPACES:
     [ \t\f]+ -> skip;
 
 PREPROC_CONTINUATION:
-    {isPreprocExpressionSubmode}?
     ('\\\n' | '\\\r\n') -> skip;
 
-PREPROC_SUBMODE_END:
-    {isPreprocExpressionSubmode}?
-    ('\n' | '\r\n')
-    { setText(""); leavePreprocExpressionSubmode(); }
-    ;
-
 EOL:
-    {!isPreprocExpressionSubmode}?
-    [\r\n]+ -> skip;
+    [\r\n]+
+    {
+        if (isPreprocExpressionSubmode) {
+            setText("");
+            setType(PREPROC_SUBMODE_END);
+            leavePreprocExpressionSubmode();
+        } else {
+            skip();
+        }
+    };
 
 // ----------------------------------------------------------------------
 // READ_INCLUDE_MODE
