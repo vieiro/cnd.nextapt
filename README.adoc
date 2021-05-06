@@ -1,7 +1,8 @@
 = cnd.nextapt
 
-The link:cnd.apt.antlr4[] directory contains an Antlr4 Lexer Grammar that may be a
-replacement to NetBeans 8.2 "cnd.apt" link:cnd.apt.nb82/aptlexer.g[aptlexer.g], that
+The link:cnd.apt.antlr4[] directory contains an Antlr4 Lexer Grammar 
+link:cnd.apt.antlr4/src/main/antlr4/org/netbeans/modules/cnd/apt/impl/support/generated/APTLexer.g4[APTLexer.g4]
+that may be a replacement to NetBeans 8.2 "cnd.apt" link:cnd.apt.nb82/aptlexer.g[aptlexer.g], that
 was implemented on top of the "cnd.antlr" runtime (a fork of Antlr v2.7.7).
 
 This projects contains link:cnd.apt.nb82/nb82/org/netbeans/netbeans82/[some jar files]
