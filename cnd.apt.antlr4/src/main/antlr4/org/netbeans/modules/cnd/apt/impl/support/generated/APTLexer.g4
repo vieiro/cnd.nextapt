@@ -177,8 +177,8 @@ fragment STRING_ENCODING:
 fragment OCTAL_DIGIT:
     (
         [0-7]
-        | [1-7][0-7]
-        | [1-7][0-7][0-7]
+        | [0-7][0-7]
+        | [0-7][0-7][0-7]
     );
 
 fragment HEXADECIMAL_DIGIT:
@@ -439,6 +439,9 @@ INCLUDE_LINE_COMMENT:
 
 INCLUDE_BLOCK_COMMENT:
     '/*' .*? '*/' -> channel(COMMENT);
+
+INCLUDE_ID:
+    [a-zA-Z_$] [a-zA-Z0-9_$]*;
 
 END_INCLUDE_DIRECTIVE:
     ('\r\n' | '\n') -> mode(DEFAULT_MODE);
