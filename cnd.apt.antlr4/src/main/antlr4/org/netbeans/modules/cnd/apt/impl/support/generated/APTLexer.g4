@@ -429,10 +429,10 @@ INCLUDE_CONTINUATION:
     ('\\\n' | '\\\r\n') -> skip;
 
 INCLUDE_LOCAL:
-    '"' ~[\r\n]+ '"';
+    '"' ~[\r\n]+? '"';
 
 INCLUDE_SYSTEM:
-    '<' ~[\r\n]+ '>';
+    '<' ~[\r\n]+? '>';
 
 INCLUDE_LINE_COMMENT:
     '//' ~[\r\n]* -> channel(COMMENT);
