@@ -188,12 +188,20 @@ fragment HEXADECIMAL_DIGIT:
         | [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f]
     );
 
+fragment UNICODE_POINT:
+    [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f];
+
+fragment UNICODE_POINT_UTF16:
+    [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f];
+
 // Characters allowed in a non-raw string
 // https://docs.microsoft.com/en-us/cpp/c-language/c-character-constants?view=msvc-160
 fragment STRING_CHAR:
     (
         '\\' ('\r\n' | '\n') // Continuation line
         | '\\x' HEXADECIMAL_DIGIT
+        | '\\u' UNICODE_POINT
+        | '\\U' UNICODE_POINT_UTF16
         | '\\' ['!?abfnrtv\\] // Character escape sequences (\r \a)
         | '\\' OCTAL_DIGIT
         | ~[\n\r"\\]
@@ -217,6 +225,8 @@ fragment CHAR_CONTENT:
         | '\\x' HEXADECIMAL_DIGIT
         | '\\' ['!?abfnrtv\\] // Character escape sequences (\r \a)
         | '\\' OCTAL_DIGIT
+        | '\\u' UNICODE_POINT
+        | '\\U' UNICODE_POINT_UTF16
         | ~[\n\r\\]
     );
 
