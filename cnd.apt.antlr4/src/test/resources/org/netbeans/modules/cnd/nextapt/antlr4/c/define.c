@@ -24,6 +24,10 @@
 
 #define EMPTY_MACRO() "This is an empty macro!"
 
+#error "This is an error"
+
+#pragma "This is a pragma"
+
 #include <stdio.h>
 
 int main(int argc, const char * argv) 

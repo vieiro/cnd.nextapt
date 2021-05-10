@@ -25,7 +25,7 @@ $ cd cnd.apt.nb82
 $ java -Dlexer.print=false -jar target/cnd.apt.nb82-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/include/
 ----
 
-This will read all `*.h/*.c` files in /usr/include and will report some performance information, like so:
+This will read all `*.h/*.hpp/*.c/*.cpp` files in /usr/include and will report some performance information, like so:
 
 [source, bash]
 ----
@@ -42,14 +42,14 @@ $ cd cnd.apt.antlr4
 $ java -Dlexer.print=false -jar target/cnd.apt.antlr4-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/include/
 ----
 
-This will read all `*.h/*.c` files in /usr/include and will report some performance information, like so:
+This will read all `*.h/*.hpp/*.c/*.cpp` files in /usr/include and will report some performance information, like so:
 
 [source, bash]
 ----
 Processed 200 files in  0,50 seconds (4,0e+02 files/second 6,4e+03 Mb/second).
 ----
 
-WARNING: If the lexer fails please report the error in the NetBeans @dev mailing list.
+WARNING: If the lexer fails please report the error in the NetBeans @dev mailing list, including the line in the file where the error was generated.
 
 If you want to see the lexer modes and tokens then remove the `-Dlexer.print=false` in the command line.
 

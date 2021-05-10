@@ -49,7 +49,7 @@ public class Main implements ANTLRErrorListener{
             default:
                 System.err.format("Usage: java %s [input-file]%n", Main.class.getName());
                 System.err.format("   Lexes stdin if no file is specified.%n");
-                System.err.format("   Lexes a file or directory (*.h/*.c) otherwise.%n");
+                System.err.format("   Lexes a file or directory (*.h,*.hpp,*.c, *.cpp) otherwise.%n");
                 System.err.format("Use -Dlexer.print=false to disable dumping to stdout.%n");
                 System.exit(1);
         }
@@ -70,7 +70,7 @@ public class Main implements ANTLRErrorListener{
         } else {
             for (File file : fileOrDirectory.listFiles()) {
                 String name = file.getName().toLowerCase();
-                if (name.endsWith(".h") || name.endsWith(".c")) {
+                if (name.endsWith(".h") || name.endsWith(".c") || name.endsWith(".hpp") || name.endsWith(".cpp")) {
                     lexFile(file);
                     nfiles++;
                     bytes += file.length();
@@ -136,6 +136,7 @@ public class Main implements ANTLRErrorListener{
                 column,
                 message
                 );
+        System.err.println("Please report this error on the dev mailing list, including the line where the error happeened.%n");
         System.exit(3);
     }
 

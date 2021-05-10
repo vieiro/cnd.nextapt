@@ -68,7 +68,7 @@ public class Performance {
         } else {
             for (File file : fileOrDirectory.listFiles()) {
                 String name = file.getName().toLowerCase();
-                if (name.endsWith(".h") || name.endsWith(".c")) {
+                if (name.endsWith(".h") || name.endsWith(".c") || name.endsWith(".hpp") || name.endsWith(".cpp")) {
                     lexFile(file);
                     nfiles++;
                     bytes += file.length();
