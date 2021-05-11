@@ -16,19 +16,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.netbeans.modules.cnd.apt.impl.support.generated;
+package org.netbeans.modules.cnd.apt.impl.support.antlr4;
 
 import java.util.Map;
 import java.util.HashMap;
 import org.antlr.v4.runtime.Token;
+import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
 
 /**
  * Transformation from identifiers to token types. See the Antlr4 Reference
  * Guide, "Recognizing Languages Whose Keywords Aren’t Fixed"
  */
-class CPPLiteralHelper {
+public final class CPPLiteralHelper {
 
-    static void checkLiteral(APTLexer lexer) {
+    public static void checkLiteral(APTLexer lexer) {
         Integer literalType = literals.get(lexer.getText());
         if (literalType != null) {
             lexer.setType(literalType);

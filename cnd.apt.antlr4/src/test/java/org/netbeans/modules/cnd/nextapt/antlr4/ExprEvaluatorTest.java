@@ -24,21 +24,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.jupiter.api.Test;
+import org.netbeans.modules.cnd.apt.impl.support.antlr4.APTExprParserEvaluator;
+import org.netbeans.modules.cnd.apt.impl.support.generated.APTExprParser;
+import org.netbeans.modules.cnd.apt.impl.support.generated.APTExprParser.ExprContext;
 import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
 
 /**
  * Verifies that the lexer does not produce any syntax error.
  */
-public class NoSyntaxErrorTest {
+public class ExprEvaluatorTest {
 
-    public NoSyntaxErrorTest() {
+    public ExprEvaluatorTest() {
     }
 
     public static class SyntaxErrorDetector implements ANTLRErrorListener {
@@ -66,28 +71,26 @@ public class NoSyntaxErrorTest {
     }
 
     @Test
-    public void testShouldNotGenerateAnySyntaxError() throws Exception {
+    public void testShouldEvaluateAllExpressionsProperly() throws Exception {
         String[] testFiles = {
             "c/char.c",
             "c/define.c",
             "c/include.c",
-            "c/complex.c",
             "c/strings.c",};
 
         for (String testFile : testFiles) {
-            System.out.format("TEST NO SYNTAX ERRORS: %s%n", testFile);
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(NoSyntaxErrorTest.class.getResourceAsStream(testFile), StandardCharsets.UTF_8))) {
+            System.out.format("TEST EXPRESSION EVALUATOR: %s%n", testFile);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(ExprEvaluatorTest.class.getResourceAsStream(testFile), StandardCharsets.UTF_8))) {
                 APTLexer lexer = new APTLexer(CharStreams.fromReader(reader));
-                lexer.addErrorListener(new SyntaxErrorDetector());
-                String previousLexerMode = lexer.getModeNames()[lexer._mode];
-                do {
-                    Token token = lexer.nextToken();
-                    if (token.getType() == Token.EOF) {
-                        break;
-                    }
-                    dumpToken(lexer, previousLexerMode, token);
-                    previousLexerMode = lexer.getModeNames()[lexer._mode];
-                } while (true);
+
+                TokenStream lexerStream = new CommonTokenStream(lexer);
+
+                APTExprParser parser = new APTExprParser(lexerStream);
+
+                parser.addParseListener(new APTExprParserEvaluator());
+
+                // TODO ExprContext context = parser.expr();
+
             }
         }
     }
