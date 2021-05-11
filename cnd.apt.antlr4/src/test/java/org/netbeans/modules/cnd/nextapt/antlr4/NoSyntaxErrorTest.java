@@ -71,7 +71,7 @@ public class NoSyntaxErrorTest {
             "c/char.c",
             "c/define.c",
             "c/include.c",
-            "c/complex.c",
+            "c/regressions.c",
             "c/strings.c",};
 
         for (String testFile : testFiles) {

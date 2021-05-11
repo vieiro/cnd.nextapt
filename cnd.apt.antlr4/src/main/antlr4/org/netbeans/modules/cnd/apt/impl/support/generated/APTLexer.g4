@@ -233,7 +233,7 @@ fragment CHAR_CONTENT:
     );
 
 CHAR_LITERAL:
-    CHAR_ENCODING?  '\'' CHAR_CONTENT '\'' ;
+    CHAR_ENCODING?  '\'' CHAR_CONTENT+ '\'' ;
 
 // Numbers
 
@@ -250,7 +250,7 @@ INTEGER:
     DECIMAL;
 
 HEXADECIMAL:
-    '0' [xX] [0-9a-fA-F]+;
+    '0' [xX] [0-9a-fA-F] [0-9a-fA-F']+;
 
 BINARY:
     '0b' [0-1]+;
@@ -512,6 +512,11 @@ END_REF_DIRECTIVE:
 // ----------------------------------------------------------------------
 mode READ_MACRO_ARGS_MODE;
 
+MACRO_LINE_COMMENT:
+    '//' ~[\r\n]* -> channel(COMMENT);
+
+MACRO_BLOCK_COMMENT:
+    '/*' .*? '*/' -> channel(COMMENT);
 
 MACRO_WHITESPACE:
     [ \t] -> skip;
