@@ -238,15 +238,6 @@ CHAR_LITERAL:
 fragment DECIMAL:
     [0-9] [0-9]*;
 
-ULONG:
-    DECIMAL ('ull' | 'uLL' | 'Ull' | 'ULL' | 'llu' | 'LLu' | 'LLU')?;
-
-LONG:
-    DECIMAL ('ul' | 'uL' | 'Ul' | 'UL' | 'lu' | 'lU' | 'Lu' | 'LU')?;
-
-INTEGER:
-    DECIMAL;
-
 HEXADECIMALINT:
     '0' [xX] [0-9a-fA-F] [0-9a-fA-F']+;
 
@@ -254,13 +245,22 @@ BINARYINT:
     '0b' [0-1]+;
 
 OCTALINT:
-    '0' [0-7]+;
+    '0' [0-7]*;
+
+ULONG:
+    DECIMAL ('ull' | 'uLL' | 'Ull' | 'ULL' | 'llu' | 'LLu' | 'LLU');
+
+LONG:
+    DECIMAL ('ul' | 'uL' | 'Ul' | 'UL' | 'lu' | 'lU' | 'Lu' | 'LU');
+
+DECIMALINT:
+    DECIMAL;
 
 fragment SIGN:
     [+-];
 
-REAL:
-    DECIMAL '.' DECIMAL? ([eE] SIGN? DECIMAL)?;
+FLOATONE:
+    DECIMAL? '.' DECIMAL? ([eE] SIGN? DECIMAL)?;
 
 // #include "... and %:+ include "...
 INCLUDE:
@@ -532,14 +532,16 @@ MACRO_SEPARATOR:
 MACRO_CONTINUATION:
     ('\\\n' | '\\\r\n') -> skip;
 
-MACRO_ARGS_START: '(';
+FUN_LIKE_MACRO_LPAREN: '(';
 
 END_MACRO_DIRECTIVE:
     ')'
     { enterPreprocExpressionSubmode(RPAREN); }
-    ;
+    -> type(RPAREN) ;
+
 ARGUMENT_ELLIPSIS:
-    '...';
+    '...' -> type(ELLIPSIS);
+
 ARGUMENT_IDENTIFIER:
     [a-zA-Z_$] [a-zA-Z0-9_$]* -> type(ID);
 

@@ -92,8 +92,8 @@ constant:
     LITERAL_true # constantTrueOp
     | LITERAL_false # constantFalseOp
     | DEFINE_NAME_REF # constantNameOp
-    | REAL # constantRealOp
-    | INTEGER # constantIntegerOp
+    | FLOATONE # constantRealOp
+    | DECIMALINT # constantIntegerOp
     | LONG # constantLongOp
     | ULONG # constantUlongOp
     | CHAR_LITERAL # constantCharOp

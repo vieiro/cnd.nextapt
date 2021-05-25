@@ -28,6 +28,7 @@ int main(int argc, const char * argv)
     int c = 0b101011;
     long l = 123l;
     double d = .123;
+    double d = .123e3;
     double d2 = 0.123;
     double d3 = 0.123e+10;
     double d4 = 0.123e-10;
