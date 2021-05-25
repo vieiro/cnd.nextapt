@@ -77,9 +77,10 @@ public class Performance {
         }
         double seconds = (System.currentTimeMillis() - start) / 1000.0;
         double filesPerSecond = nfiles / seconds;
-        double megaBytesPerSecond = bytes / 1024 / seconds;
-        System.err.format("Processed %d files in %5.2g seconds (%5.2g files/second %5.2g Mb/second).%n", 
-                nfiles, seconds, filesPerSecond, megaBytesPerSecond);
+        double megaBytes = bytes / 1024 / 1024;
+        double megaBytesPerSecond = megaBytes / seconds;
+        System.err.format("Processed %d files (%g Mb) in %.3f seconds (%.3f files/second %.3f Mb/second).%n", 
+                nfiles, megaBytes, seconds, filesPerSecond, megaBytesPerSecond);
     }
 
     private static void lexFile(File file) throws Exception {

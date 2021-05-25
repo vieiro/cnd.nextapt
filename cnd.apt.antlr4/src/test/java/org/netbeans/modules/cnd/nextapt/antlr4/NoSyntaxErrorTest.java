@@ -31,7 +31,7 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.jupiter.api.Test;
-import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
+import org.netbeans.modules.cnd.apt.impl.support.generated.v2.APTLexer;
 
 /**
  * Verifies that the lexer does not produce any syntax error.

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.netbeans.modules.cnd.nextapt.antlr4;
+package org.netbeans.cnd.nextapt.comparison;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -32,22 +32,21 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.netbeans.modules.cnd.apt.impl.support.generated.v2.APTLexer;
+import org.netbeans.modules.cnd.apt.structure.APTFile;
+import org.netbeans.modules.cnd.apt.utils.APTUtils;
 
 /**
- *
+ * Compares the NB82 and ANTLR4 cnd.apt Lexers.
  */
-public class Main implements ANTLRErrorListener{
+public class LexerComparator implements ANTLRErrorListener {
 
     public static void main(String[] args) throws Exception {
-        switch(args.length) {
-            case 0:
-                lexInputStream(System.in);
-                break;
+        switch (args.length) {
             case 1:
                 lexFileOrDirectory(new File(args[0]));
                 break;
             default:
-                System.err.format("Usage: java %s [input-file]%n", Main.class.getName());
+                System.err.format("Usage: java %s [input-file]%n", LexerComparator.class.getName());
                 System.err.format("   Lexes stdin if no file is specified.%n");
                 System.err.format("   Lexes a file or directory (*.h,*.hpp,*.c, *.cpp) otherwise.%n");
                 System.err.format("Use -Dlexer.print=false to disable dumping to stdout.%n");
@@ -56,7 +55,7 @@ public class Main implements ANTLRErrorListener{
     }
 
     private static void lexFileOrDirectory(File fileOrDirectory) throws Exception {
-        if (! fileOrDirectory.exists()) {
+        if (!fileOrDirectory.exists()) {
             System.err.format("File %s does not exist.%n", fileOrDirectory.getAbsolutePath());
             System.exit(2);
         }
@@ -78,56 +77,61 @@ public class Main implements ANTLRErrorListener{
             }
         }
         double seconds = (System.currentTimeMillis() - start) / 1000.0;
-        double filesPerSecond = nfiles / seconds;
-        double megaBytes = bytes / 1024 / 1024;
-        double megaBytesPerSecond = megaBytes / seconds;
-        System.err.format("Processed %d files (%g Mb) in %.3f seconds (%.3f files/second %.3f Mb/second).%n", 
-                nfiles, megaBytes, seconds, filesPerSecond, megaBytesPerSecond);
+        double filesPerSecond = nfiles == 0 ? 0 : nfiles / seconds;
+        double megaBytesPerSecond = bytes == 0 ? 0 : bytes / 1024 / seconds;
+        System.err.format("Processed %d files in %5.2g seconds (%5.2g files/second %5.2g Mb/second).%n",
+                nfiles, seconds, filesPerSecond, megaBytesPerSecond);
     }
 
     private static void lexFile(File file) throws Exception {
         System.err.format("-- %s --%n", file.getAbsolutePath());
-        try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(file), 32*1024)) {
-            lexInputStream(input);
+        try (
+                BufferedInputStream inputA = new BufferedInputStream(new FileInputStream(file), 32 * 1024);
+                BufferedInputStream inputB = new BufferedInputStream(new FileInputStream(file), 32 * 1024)) {
+            lexInputStream(inputA, inputB);
         }
     }
 
-    private static void lexInputStream(InputStream input) throws Exception {
-        Main main = new Main();
-        main.dumpTokens(input);
+    static void lexInputStream(InputStream inputA, InputStream inputB) throws Exception {
+        LexerComparator main = new LexerComparator();
+        main.dumpTokens(inputA, inputB);
     }
 
-    public void dumpTokens(InputStream input) throws Exception {
+    public void dumpTokens(InputStream inputA, InputStream inputB) throws Exception {
         String print = System.getProperty("lexer.print");
-        boolean dump = (print != null && print.toLowerCase().equals("false"))? false : true;
-        APTLexer lexer = new APTLexer(CharStreams.fromStream(input));
+        boolean dump = (print != null && print.toLowerCase().equals("false")) ? false : true;
+        APTLexer lexer = new APTLexer(CharStreams.fromStream(inputA));
         lexer.removeErrorListeners();
         lexer.addErrorListener(this);
         String previousLexerMode = lexer.getModeNames()[lexer._mode];
+
+        org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer oldLexer = new org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer(inputB);
+        oldLexer.init("INPUT", 0, APTFile.Kind.C_CPP);
+
         do {
-            Token token = lexer.nextToken();
-            if (token.getType() == Token.EOF) {
+            Token newToken = lexer.nextToken();
+            org.netbeans.modules.cnd.antlr.Token oldToken = oldLexer.nextToken();
+            if (newToken.getType() == Token.EOF) {
                 break;
             }
-            if (dump) {
-                dumpToken(lexer, previousLexerMode, token);
+            if (APTUtils.isEOF(oldToken)) {
+                break;
             }
+            dumpTokens(lexer, newToken, oldToken);
             previousLexerMode = lexer.getModeNames()[lexer._mode];
-        } while(true);
+        } while (true);
     }
 
-    private static void dumpToken(APTLexer lexer, String previousLexerMode, Token token) {
-        String tokenText = token.getText().replaceAll("(\r\n|\n)", "|");
-        String currentLexerMode = lexer.getModeNames()[lexer._mode];
-        String tokenName = lexer.VOCABULARY.getSymbolicName(token.getType());
-        System.out.format("%4d:%4d:%-20s->%-20s:%-20s:%s%n",
-                token.getLine(),
-                token.getCharPositionInLine(),
-                previousLexerMode,
-                currentLexerMode,
-                tokenName,
-                tokenText
-                );
+    private void dumpTokens(APTLexer lexer, Token newToken, org.netbeans.modules.cnd.antlr.Token oldToken) {
+        String newTokenName = lexer.VOCABULARY.getSymbolicName(newToken.getType());
+        String oldTokenName = APTUtils.getAPTTokenName(oldToken.getType());
+        if (!newTokenName.equals(oldTokenName)) {
+            System.out.format("%4d:%4d NEW %s OLD %s%n",
+                    newToken.getLine(),
+                    newToken.getCharPositionInLine(),
+                    newTokenName,
+                    oldTokenName);
+        }
     }
 
     @Override
@@ -136,7 +140,7 @@ public class Main implements ANTLRErrorListener{
                 line,
                 column,
                 message
-                );
+        );
         System.err.println("Please report this error on the dev mailing list, including the line where the error happeened.%n");
         System.exit(3);
     }

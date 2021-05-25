@@ -94,9 +94,10 @@ constant:
     | DEFINE_NAME_REF # constantNameOp
     | REAL # constantRealOp
     | INTEGER # constantIntegerOp
-    | HEXADECIMAL # constantHexadecimalOp
     | LONG # constantLongOp
     | ULONG # constantUlongOp
     | CHAR_LITERAL # constantCharOp
-    | BINARY # constantBinaryOp
+    | BINARYINT # constantBinaryOp
+    | HEXADECIMALINT # constantHexadecimalOp
+    | OCTALINT # constantOctalIntOp
     ;

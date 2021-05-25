@@ -12,3 +12,4 @@ buildNumber.properties
 *.swo
 
 /cnd.apt.antlr4/nbproject/
+/cnd.apt.nb82-antlr4-comparison/nbproject/

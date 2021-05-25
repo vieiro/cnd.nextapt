@@ -21,8 +21,8 @@ package org.netbeans.modules.cnd.apt.impl.support.antlr4;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import org.netbeans.modules.cnd.apt.impl.support.generated.APTExprParser;
-import org.netbeans.modules.cnd.apt.impl.support.generated.APTExprParserBaseListener;
+import org.netbeans.modules.cnd.apt.impl.support.generated.v2.APTExprParser;
+import org.netbeans.modules.cnd.apt.impl.support.generated.v2.APTExprParserBaseListener;
 
 /**
  * An implementation of APTExprParserBaserListener that evaluates 

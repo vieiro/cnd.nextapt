@@ -8,6 +8,7 @@
     <modules>
         <module>cnd.apt.antlr4</module>
         <module>cnd.apt.nb82</module>
+        <module>cnd.apt.nb82-antlr4-comparison</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

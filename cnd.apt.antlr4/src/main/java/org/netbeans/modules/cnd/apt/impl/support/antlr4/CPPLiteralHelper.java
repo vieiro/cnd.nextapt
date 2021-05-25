@@ -20,8 +20,7 @@ package org.netbeans.modules.cnd.apt.impl.support.antlr4;
 
 import java.util.Map;
 import java.util.HashMap;
-import org.antlr.v4.runtime.Token;
-import org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer;
+import org.netbeans.modules.cnd.apt.impl.support.generated.v2.APTLexer;
 
 /**
  * Transformation from identifiers to token types. See the Antlr4 Reference
