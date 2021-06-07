@@ -30,6 +30,10 @@
 
 #include <stdio.h>
 
+#ifdef A & defined(B)
+#error "Yes, A and B are defined"
+#endif
+
 int main(int argc, const char * argv) 
 {
     printf("PI2 is %d\n", PI2, SUM(PI2));

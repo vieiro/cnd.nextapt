@@ -22,6 +22,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.BitSet;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStreams;
@@ -100,38 +101,94 @@ public class LexerComparator implements ANTLRErrorListener {
     public void dumpTokens(InputStream inputA, InputStream inputB) throws Exception {
         String print = System.getProperty("lexer.print");
         boolean dump = (print != null && print.toLowerCase().equals("false")) ? false : true;
+
+        // New tokens
         APTLexer lexer = new APTLexer(CharStreams.fromStream(inputA));
         lexer.removeErrorListeners();
         lexer.addErrorListener(this);
         String previousLexerMode = lexer.getModeNames()[lexer._mode];
-
-        org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer oldLexer = new org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer(inputB);
-        oldLexer.init("INPUT", 0, APTFile.Kind.C_CPP);
+        ArrayList<Token> newTokens = new ArrayList<>();
+        ArrayList<String> newTokenNames = new ArrayList<>();
 
         do {
             Token newToken = lexer.nextToken();
-            org.netbeans.modules.cnd.antlr.Token oldToken = oldLexer.nextToken();
             if (newToken.getType() == Token.EOF) {
                 break;
             }
+            String newTokenName = lexer.VOCABULARY.getSymbolicName(newToken.getType());
+            newTokens.add(newToken);
+            newTokenNames.add(newTokenName);
+        } while (true);
+
+        org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer oldLexer = new org.netbeans.modules.cnd.apt.impl.support.generated.APTLexer(inputB);
+        oldLexer.init("INPUT", 0, APTFile.Kind.C_CPP);
+        ArrayList<org.netbeans.modules.cnd.antlr.Token> oldTokens = new ArrayList();
+
+        do {
+            org.netbeans.modules.cnd.antlr.Token oldToken = oldLexer.nextToken();
             if (APTUtils.isEOF(oldToken)) {
                 break;
             }
-            dumpTokens(lexer, newToken, oldToken);
-            previousLexerMode = lexer.getModeNames()[lexer._mode];
+            oldTokens.add(oldToken);
         } while (true);
+
+        for (int i = 0, j = 0; i < newTokens.size() && j < oldTokens.size(); i++, j++) {
+            Token newToken = newTokens.get(i);
+            String newTokenName = newTokenNames.get(i);
+            org.netbeans.modules.cnd.antlr.Token oldToken = oldTokens.get(j);
+            String oldTokenName = APTUtils.getAPTTokenName(oldToken.getType());
+
+            if (! newTokenName.equals(oldTokenName)) {
+                System.out.format("%4d:%4d NEW %s OLD %s %4d:%4d%n",
+                        newToken.getLine(),
+                        newToken.getCharPositionInLine(),
+                        newTokenName,
+                        oldTokenName,
+                        oldTokens.get(j).getLine(),
+                        oldTokens.get(j).getColumn()
+                        );
+
+                // Move new token to next line
+                int newTokenLine = newToken.getLine();
+                while(i < newTokens.size() && newTokens.get(i).getLine() == newTokenLine ) {
+                    i++;
+                }
+
+                // Move old token to next line
+                int oldTokenLine = oldToken.getLine();
+                while(j < oldTokens.size() && oldTokens.get(j).getLine() == oldTokenLine) {
+                    j++;
+                }
+
+                /*
+                boolean advanceNext = false;
+                boolean advanceOld = false;
+                if (i + 1 < newTokens.size()) {
+                    String nextNewTokenName = newTokenNames.get(i+1);
+                    if (nextNewTokenName.equals(oldTokenName)) {
+                        advanceNext = true;
+                    }
+                }
+                if (! advanceNext && j + 1 < oldTokens.size()) {
+                    String nextOldTokenName = APTUtils.getAPTTokenName(oldTokens.get(j+1).getType());
+                    if (newTokenName.equals(nextOldTokenName)) {
+                        advanceOld = true;
+                    }
+                }
+                if (advanceNext) {
+                    i++;
+                }
+                if (advanceOld) {
+                    j++;
+                }
+                */
+            }
+        }
     }
 
     private void dumpTokens(APTLexer lexer, Token newToken, org.netbeans.modules.cnd.antlr.Token oldToken) {
         String newTokenName = lexer.VOCABULARY.getSymbolicName(newToken.getType());
         String oldTokenName = APTUtils.getAPTTokenName(oldToken.getType());
-        if (!newTokenName.equals(oldTokenName)) {
-            System.out.format("%4d:%4d NEW %s OLD %s%n",
-                    newToken.getLine(),
-                    newToken.getCharPositionInLine(),
-                    newTokenName,
-                    oldTokenName);
-        }
     }
 
     @Override

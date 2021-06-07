@@ -259,8 +259,21 @@ DECIMALINT:
 fragment SIGN:
     [+-];
 
+fragment FRACTIONAL_DECIMAL:
+    DECIMAL? '.' DECIMAL
+    | DECIMAL '.';
+
+fragment FLOATING_SUFFIX:
+    [flFL];
+
+fragment EXPONENT_PART:
+    [eE] SIGN? DECIMAL;
+
 FLOATONE:
-    DECIMAL? '.' DECIMAL? ([eE] SIGN? DECIMAL)?;
+    FRACTIONAL_DECIMAL EXPONENT_PART? FLOATING_SUFFIX?
+    | DECIMAL EXPONENT_PART? FLOATING_SUFFIX?;
+
+DBL_SHARP: '##';
 
 // #include "... and %:+ include "...
 INCLUDE:
@@ -305,6 +318,7 @@ PRAGMA:
     ('#' | '%:'+)
     [ \t]*
     'pragma'
+    [ \t]*
     { enterPreprocExpressionSubmode(PRAGMA); }
     ;
 
@@ -312,8 +326,8 @@ ERROR:
     ('#' | '%:'+)
     [ \t]*
     'error'
-    { enterPreprocExpressionSubmode(ERROR); }
-    ;
+    ~[\r\n]*
+    -> mode(AWAIT_EOL_END_PREPROC_DIRECTIVE);
 
 UNDEF:
     ('#' | '%:'+)
@@ -343,16 +357,15 @@ ELSE:
     ('#' | '%:'+)
     [ \t]*
     'else'
-    [ \t]*;
+    [ \t]* -> mode(AWAIT_EOL_END_PREPROC_DIRECTIVE);
 
 ENDIF:
     ('#' | '%:'+)
     [ \t]*
     'endif'
-    [ \t]*;
+    [ \t]* -> mode(AWAIT_EOL_END_PREPROC_DIRECTIVE);
 
 // TODO: Trigraphs?
-
 
 HASH: '#';
 
@@ -398,6 +411,7 @@ BITWISEXOR              : '^';
 SCOPE                   : '::';
 COLON                   : ':';
 SHIFTLEFT               : '<<';
+SHIFTLEFTEQUAL          : '<<=';
 LESSTHANOREQUALTO       : '<=';
 LESSTHAN                : '<'; // TODO: Review this one <:: C++11 2.5p3 bullet 2???
 AT                      : '@';
@@ -450,7 +464,7 @@ mode READ_INCLUDE_MODE;
 INCLUDE_CONTINUATION:
     ('\\\n' | '\\\r\n') -> skip;
 
-INCLUDE_LOCAL:
+INCLUDE_STRING:
     '"' ~[\r\n]+? '"';
 
 SYS_INCLUDE_STRING:
@@ -527,7 +541,7 @@ MACRO_WHITESPACE:
     [ \t] -> skip;
 
 MACRO_SEPARATOR:
-    ',' -> skip;
+    ',' -> type(COMMA);
 
 MACRO_CONTINUATION:
     ('\\\n' | '\\\r\n') -> skip;
@@ -544,4 +558,21 @@ ARGUMENT_ELLIPSIS:
 
 ARGUMENT_IDENTIFIER:
     [a-zA-Z_$] [a-zA-Z0-9_$]* -> type(ID);
+
+// ----------------------------------------------------------------------
+// AWAIT_EOLEND_PREPROC_DIRECTIVE
+// We enter this mode after '#else', '#endif' and await an EOL
+// to send an END_PREPROC_DIRECTIVE token.
+// ----------------------------------------------------------------------
+mode AWAIT_EOL_END_PREPROC_DIRECTIVE;
+
+AWAIT_EOL_LINE_COMMENT:
+    '//' ~[\r\n]* -> type(CPP_COMMENT), channel(COMMENT_CHANNEL);
+
+AWAIT_EOL_BLOCK_COMMENT:
+    '/*' .*? '*/' -> type(COMMENT), channel(COMMENT_CHANNEL);
+
+AWAIT_EOL_EOL:
+    [\r\n]+ -> type(END_PREPROC_DIRECTIVE), mode(DEFAULT_MODE);
+
 

@@ -6,18 +6,11 @@
 package org.netbeans.cnd.nextapt.comparison;
 
 import java.io.InputStream;
-import java.util.BitSet;
-import org.antlr.v4.runtime.Parser;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.atn.ATNConfigSet;
-import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -50,8 +43,9 @@ public class LexerComparatorTest {
             "c/char.c",
             "c/define.c",
             "c/include.c",
-            "c/regressions.c",
-            "c/strings.c",};
+            "c/strings.c",
+            "c/ksort.h",
+        };
 
         for (String testFile : testFiles) {
             System.out.format("TEST: %s%n", testFile);
